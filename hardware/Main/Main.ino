@@ -20,6 +20,9 @@ void loop() {
 
     if(millis() - startTime < 1000)
         return;
+    
+    Serial.println("$sdoakfdasfmee!");
+    delay(10000);
 
     startTime = millis();
 
@@ -51,8 +54,8 @@ String readRFID(){
     String content = "";
 
     for (byte i = 0; i < rfid.uid.size; i++) {
-        content.concat(String(rfid.uid.uidByte[i] < 0x10 ? "0" : ""));
-        content.concat(String(rfid.uid.uidByte[i], HEX));
+        content += String(rfid.uid.uidByte[i] < 0x10 ? "0" : "");
+        content += String(rfid.uid.uidByte[i], HEX);
     }
     
     content.toUpperCase();

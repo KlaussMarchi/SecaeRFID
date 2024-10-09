@@ -1,6 +1,7 @@
 import eel
 import serial
 import serial.tools.list_ports
+from time import sleep
 
 device = {
     'object'  : None,
@@ -35,13 +36,14 @@ def connectDevice(port, baudRate=9600, timeout=5):
 @eel.expose
 def setSerial(msg):
     global device
+    arduino = device.get('object')
 
-    if device.get('object') is None:
+    if arduino is None:
         return False
 
     try:
         msg = (msg.strip() + '\r\n').encode()
-        device['object'].write(msg)
+        arduino.write(msg)
     except Exception as e:
         print(e)
         return False
@@ -52,12 +54,13 @@ def setSerial(msg):
 @eel.expose
 def getSerial():
     global device
+    arduino = device.get('object')
 
-    if device.get('object') is None:
+    if arduino is None:
         return None
 
     try:
-        return device['object'].readline().decode('utf-8').strip()
+        return arduino.readline().decode('utf-8').strip()
     except Exception as e:
         print(e)
         return None
