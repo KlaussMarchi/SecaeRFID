@@ -4,6 +4,11 @@ eel.init('static')
 from src.database import *
 from src.serial import *
 
+@eel.expose
+def getActivities():
+    with open('tasks.json', 'r') as file:
+        data = json.load(file)
+    return data
 
 @eel.expose
 def App():

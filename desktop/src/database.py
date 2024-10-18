@@ -23,6 +23,7 @@ def getDatabaseRows(tableName, timeout=10):
 
 @eel.expose
 def addDatabaseRow(tableName, newData, timeout=10):
+    print('add data: ', newData)
     newData = json.dumps(newData)
     link = url + tableName + '.json'
     
@@ -37,9 +38,11 @@ def addDatabaseRow(tableName, newData, timeout=10):
 @eel.expose
 def findDatabaseRow(tableName, key, value, timeout=10):
     link = url + tableName + '.json'
+    print(f'procurando {key}: {value}')
 
     try:
         response = requests.get(link, timeout=timeout).json()
+        print(response)
     except:
         return None
 

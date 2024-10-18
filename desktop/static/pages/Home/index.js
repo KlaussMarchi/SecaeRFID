@@ -1,14 +1,19 @@
-async function sleep(ms) {
-    await new Promise(resolve => setTimeout(resolve, ms));
+function logButton(){
+    window.location.href = '../Login/index.html'
 }
 
-async function connectSerial(){
-    await eel.connectDevice('COM11', 9600, 5)()
-    await sleep(1000)
-
-    const response = await eel.getSerialResponse('request')();
-    alert(response)
+function registerButton(){
+    window.location.href = '../Register/index.html'
 }
 
-document.getElementById("ConnectSerialBtn").addEventListener("click", connectSerial)
+function goBack(){
+    window.location.href = '../../index.html'
+}
+
+window.onload = function () {
+    document.getElementById("buttonLog").addEventListener("click", logButton);
+    document.getElementById("buttonReg").addEventListener("click", registerButton);
+    document.getElementById("btnVoltar").addEventListener("click", goBack);
+};
+
 

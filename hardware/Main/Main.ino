@@ -1,30 +1,45 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define SS_PIN 10 
+#define SDA_PIN 10
 #define RST_PIN 9
-#define BUZZER 12
+#define BUZZER 3
 
-MFRC522 rfid(SS_PIN, RST_PIN);
+MFRC522 rfid(SDA_PIN, RST_PIN);
 MFRC522::MIFARE_Key key;
+
+String getSerial(){
+    String response = Serial.readString();
+    int inicial = response.indexOf("$");
+    int final   = response.indexOf("!");
+
+    if(inicial == -1 || final == -1)
+        return "-1";
+
+    return response.substring(inicial+1, final);
+}
+
+void writeSerial(String text){
+    text.trim();
+    Serial.println("$" + text + "!");
+}
+
+void handleSerialTest(){
+    if(!Serial.available())
+        return;
+
+    String response = getSerial();
+    writeSerial("connected");
+}
 
 void setup() {
     Serial.begin(9600);
     SPI.begin();        
     rfid.PCD_Init(); 
-    Serial.println("Aproxime o cartão RFID...");
 }
 
 void loop() {
-    static unsigned long startTime = millis();
-
-    if(millis() - startTime < 1000)
-        return;
-    
-    Serial.println("$sdoakfdasfmee!");
-    delay(10000);
-
-    startTime = millis();
+    handleSerialTest();
 
     if(!isCardAvailable())
         return;
@@ -34,7 +49,7 @@ void loop() {
     if(!isValidID(ID))
         return;
     
-    Serial.println(ID);
+    writeSerial(ID);
     tone(BUZZER, 5000);
     delay(500);
     noTone(BUZZER);

@@ -10,6 +10,8 @@ body {
 }
 
 .container {
+    width: 50%;
+    height: 60%;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
@@ -36,4 +38,40 @@ button {
 
 button:hover {
     background-color: #555;
+}
+
+.formOptions{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#sendButtonForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 5rem;
+}
+
+#taskOptions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 50%;
+}
+
+#meuInputForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1rem;
+    width: 10rem;
+}
+
+#btnVoltar{
+    display: flex;
+    height: 2rem;
 }

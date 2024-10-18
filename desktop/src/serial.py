@@ -11,20 +11,21 @@ device = {
 
 @eel.expose
 def getSerialPorts():
-    return [str(port) for port in serial.tools.list_ports.comports()]
+    return [str(port).split(' ')[0] for port in serial.tools.list_ports.comports()]
 
 
 @eel.expose
 def connectDevice(port, baudRate=9600, timeout=5):
     global device
+    print('tentando conexão na', port)
     
     if device['object'] and device['object'].is_open:
         return True
 
     try:
-        device['port'] = port
+        device['object']   = serial.Serial(port, baudRate, timeout=timeout)
+        device['port']     = port
         device['baudRate'] = baudRate
-        device['object'] = serial.Serial(port, baudRate, timeout=timeout)
     except Exception as e:
         print(e)
         device['object'] = None
@@ -36,13 +37,14 @@ def connectDevice(port, baudRate=9600, timeout=5):
 @eel.expose
 def setSerial(msg):
     global device
+    print('enviando mensagem:', msg)
     arduino = device.get('object')
 
     if arduino is None:
         return False
 
     try:
-        msg = (msg.strip() + '\r\n').encode()
+        msg = ('$' + msg.strip() + '!' + '\r\n').encode()
         arduino.write(msg)
     except Exception as e:
         print(e)
@@ -55,12 +57,20 @@ def setSerial(msg):
 def getSerial():
     global device
     arduino = device.get('object')
+    print('procurando...')
 
     if arduino is None:
         return None
 
     try:
-        return arduino.readline().decode('utf-8').strip()
+        response = arduino.readline().decode('utf-8').strip()
+        inicial  = response.find('$')
+        final    = response.find('!')
+
+        if inicial == -1 or final == -1:
+            return None
+        
+        return response[inicial+1:final]
     except Exception as e:
         print(e)
         return None
