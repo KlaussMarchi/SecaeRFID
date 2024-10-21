@@ -1,5 +1,5 @@
 import eel
-eel.init('static2')
+eel.init('static')
 
 from src.database import *
 from src.serial import *
