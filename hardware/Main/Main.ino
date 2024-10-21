@@ -53,6 +53,7 @@ void loop() {
     tone(BUZZER, 5000);
     delay(500);
     noTone(BUZZER);
+    delay(5000);
 }
 
 bool isCardAvailable(){

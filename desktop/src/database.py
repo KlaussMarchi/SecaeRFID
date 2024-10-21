@@ -42,6 +42,10 @@ def findDatabaseRow(tableName, key, value, timeout=10):
 
     try:
         response = requests.get(link, timeout=timeout).json()
+
+        if response is None:
+            return None
+        
         print(response)
     except:
         return None

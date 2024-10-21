@@ -1,5 +1,5 @@
 import eel
-eel.init('static')
+eel.init('static2')
 
 from src.database import *
 from src.serial import *
@@ -16,5 +16,5 @@ def App():
 
 
 App()
-eel.start('index.html', size=(1024, 768))
+eel.start('index.html', size=(1200, 768))
 

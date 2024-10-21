@@ -2,6 +2,7 @@ import eel
 import serial
 import serial.tools.list_ports
 from time import sleep
+import winsound
 
 device = {
     'object'  : None,
@@ -81,5 +82,16 @@ def getSerialResponse(msg):
     if not setSerial(msg):
         return None
     
-    return getSerial()
+    response = getSerial()
+    print('response: ', response)
+    return response
 
+
+@eel.expose
+def makeGoodBeep():
+    winsound.Beep(2500, 500)
+
+
+@eel.expose
+def makeBadBeep():
+    winsound.Beep(400, 1500)
