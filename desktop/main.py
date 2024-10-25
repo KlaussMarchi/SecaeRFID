@@ -6,7 +6,7 @@ from src.serial import *
 
 @eel.expose
 def getActivities():
-    with open('tasks.json', 'r') as file:
+    with open('tasks.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
     return data
 
