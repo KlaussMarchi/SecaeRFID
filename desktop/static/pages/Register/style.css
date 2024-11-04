@@ -1,0 +1,14 @@
+body {
+    overflow-y: scroll; /* Para garantir que o scroll funcione */
+}
+
+/* Para navegadores baseados em WebKit como Chrome e Safari */
+body::-webkit-scrollbar {
+    width: 0; /* Faz a barra de rolagem ter 0 de largura */
+    background: transparent; /* Deixa transparente */
+}
+
+/* Para Firefox */
+body {
+    scrollbar-width: none; /* Esconde a barra de rolagem */
+}

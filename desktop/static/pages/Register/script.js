@@ -1,3 +1,5 @@
+searching = false
+
 async function sleep(ms) {
     await new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -38,14 +40,19 @@ async function searchCardClick(){
     input.value = 'procurando...'
     await sleep(1000)
 
-    const response = await getCardID()
+    let response = false
+    searching = true
 
-    if(!response){
-        disableButton('', button)
-        return await searchCardClick()
+    while(!response && searching){
+        response = await getCardID()
+        await sleep(500)
     }
     
+    if(!response)
+        return await disableButton('', button)
+
     input.value = response.trim()
+    eel.makeGoodBeep()
     await sleep(1500)
     button.disabled = false
 }
@@ -56,8 +63,8 @@ async function registerUser(){
     await sleep(1500)
 
     const data = {
-        name: document.getElementById('nameInputReg').value.trim(),
-        mat:  document.getElementById('matInputReg').value.trim(),
+        name: document.getElementById('nameInputReg').value.toUpperCase().trim(),
+        mat:  document.getElementById('matInputReg').value.replace(' ', '').trim(),
         id:   document.getElementById('inputCard').value.trim(),
     }
 
@@ -75,8 +82,16 @@ async function registerUser(){
     await disableButton('usuário registrado', button, 'good')
 }
 
+async function cleanCard() {
+    document.getElementById('nameInputReg').value = ''
+    document.getElementById('matInputReg').value  = ''
+    document.getElementById('inputCard').value    = ''
+    searching = false
+}
+
 window.onload = function () {
     document.getElementById("seachCardButton").addEventListener("click", async () => await searchCardClick());
     document.getElementById("registerUserButton").addEventListener("click", async () => await registerUser());
+    document.getElementById("cleanCardButton").addEventListener("click", async () => await cleanCard());
 };
 

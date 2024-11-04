@@ -75,6 +75,7 @@ String readRFID(){
     }
     
     content.toUpperCase();
+    content.replace(" ", "");
     content.trim();
     return content;
 }

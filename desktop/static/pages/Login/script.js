@@ -1,3 +1,4 @@
+var searching = false;
 
 
 async function sleep(ms) {
@@ -40,14 +41,19 @@ async function searchCardClick(){
     input.value = 'procurando...'
     await sleep(1000)
 
-    const response = await getCardID()
+    let response = false
+    searching = true
 
-    if(!response){
-        await disableButton('', button)
-        return await searchCardClick()
+    while(!response && searching){
+        response = await getCardID()
+        await sleep(500)
     }
+
+    if(!response)
+        return await disableButton('', button)
     
     input.value = response.trim()
+    eel.makeGoodBeep()
     await findUser()
     button.disabled = false
 }
@@ -66,15 +72,20 @@ async function findUser(){
 
     document.getElementById('nameInputReg').value = 'carregando...'
     document.getElementById('matInputReg').value  = 'carregando...'
+    document.getElementById('inputCard').value = 'carregando...'
     await sleep(1500)
 
-    if(cardID.length < 5)
+    if(cardID.length < 4)
         response = await eel.findDatabaseRow('users', 'mat', mat)()
     else
         response = await eel.findDatabaseRow('users', 'id', cardID)()
 
-    if(!response || !response.data)
+    if(!response || !response.data){
+        document.getElementById('nameInputReg').value = ''
+        document.getElementById('matInputReg').value  = ''
+        document.getElementById('inputCard').value    = ''
         return await disableButton('usuário não encontrado', button, 'bad')
+    }
 
     const user = response.data
     document.getElementById('inputCard').value    = user.id
@@ -99,14 +110,15 @@ async function importOptions() {
 async function registerTaskClick(){
     var button = document.getElementById('registerTask')
     button.disabled = true
+    await sleep(500)
 
     const dropdown = document.getElementById("taskOptions");
     const selected = dropdown.options[dropdown.selectedIndex].value;
 
     const data = {
-        name: document.getElementById('nameInputReg').value.trim(),
-        mat:  document.getElementById('matInputReg').value.trim(),
-        id:   document.getElementById('inputCard').value.trim(),
+        name: document.getElementById('nameInputReg').value.toUpperCase().trim(),
+        mat:  document.getElementById('matInputReg').value.replace(' ', '').trim(),
+        id:   document.getElementById('inputCard').value.replace(' ', '').trim(),
     }
 
     if(data.name.length < 5 || data.mat.length < 5)
@@ -123,10 +135,18 @@ async function registerTaskClick(){
     await disableButton('usuário registrado', button, 'good')
 }
 
+async function cleanCard() {
+    document.getElementById('nameInputReg').value = ''
+    document.getElementById('matInputReg').value  = ''
+    document.getElementById('inputCard').value    = ''
+    searching = false
+}
+
 window.onload = function () {
     importOptions()
 
     document.getElementById("searchUserButton").addEventListener("click", async () => await findUser());
     document.getElementById("searchCardButton").addEventListener("click", async () => await searchCardClick());
     document.getElementById("registerTask").addEventListener("click", async () => await registerTaskClick());
+    document.getElementById("cleanCardButton").addEventListener("click", async () => await cleanCard());
 };

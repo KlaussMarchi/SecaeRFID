@@ -16,5 +16,5 @@ def App():
 
 
 App()
-eel.start('index.html', size=(1200, 768))
+eel.start('index.html', size=(1100, 768))
 

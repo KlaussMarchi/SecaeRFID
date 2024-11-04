@@ -1,13 +1,8 @@
 import requests
 import json
-import uuid
 import eel
 
 url = r'https://xi-secae-default-rtdb.firebaseio.com/'
-
-
-def genUUID():
-    return uuid.uuid4().__str__()
 
 
 @eel.expose
@@ -38,15 +33,12 @@ def addDatabaseRow(tableName, newData, timeout=10):
 @eel.expose
 def findDatabaseRow(tableName, key, value, timeout=10):
     link = url + tableName + '.json'
-    print(f'procurando {key}: {value}')
-
+    
     try:
         response = requests.get(link, timeout=timeout).json()
 
         if response is None:
             return None
-        
-        print(response)
     except:
         return None
 

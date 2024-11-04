@@ -1,0 +1,7 @@
+Nome	E-mail	Status	Ações
+Caíque Nóbrega	iquenobrega@gmail.com	Ativa	
+Davi do Amaral Pereira	ffda.pereira@gmail.com	Ativa	
+Glauber Braga Ferreira	glauberbragaferreira@gmail.com	Ativa	
+Gustavo Porto de Souza	gportodesouza@gmail.com	Ativa	
+Isaías Cândido de Souza	isaiascandido63@gmail.com	Ativa	
+Natan Pessanha	natanpessanha@gmail.com	Ativa

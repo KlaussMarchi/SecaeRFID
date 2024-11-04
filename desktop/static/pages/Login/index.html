@@ -39,11 +39,12 @@
     <br><br><br><br>
     
     <section class="container bg-black rounded-3 p-lg-4">
-        <h2 class="text-center text-light m-3">Confirmar Presença</h2>
+        <h2 class="text-center text-light m-3">
+            Confirmar Presença
+        </h2>
         
         <form class="row justify-content-center" method="#" action="#">
             <fieldset class="text-light">
-                <legend>Qual Atividade Deseja Conformar Presença?</legend><br>
                 
                 <div class="mb-3">          
                     <select id="taskOptions" class="form-select" name="cursoSelect"></select>
@@ -68,21 +69,34 @@
 
             <fieldset class="text-light">                    
                 <div class="mb-3">
-                    <labe class="form-label" for="numeroCartao">
+                    <label class="form-label" for="numeroCartao">
                         Número do Cartão:<br>
-                    </labe>
-                    <input class="form-control" name="numeroCartao" id="inputCard" type="text"><br>
-                    
-                    <button 
-                        class="btn btn-success text-black" 
-                        id="searchCardButton"
-                    >
-                        <strong>Procurar</strong>
-                    </button>
+                    </label>
+
+                    <div style="display: flex; flex-direction: row;">
+                        <input class="form-control" name="numeroCartao" id="inputCard" type="text"><br>
+                        
+                        <div style="padding: 5px;"></div>
+
+                        <button 
+                            class="btn btn-success text-black" 
+                            id="searchCardButton"
+                        >
+                            <strong>Procurar</strong>
+                        </button>
+
+                        <div style="padding: 5px;"></div>
+
+                        <button 
+                            class="btn btn-success text-black" 
+                            id="cleanCardButton"
+                        >
+                            <strong>Limpar</strong>
+                        </button>
+                    </div>
                 </div>               
             </fieldset>
             
-            <br>
             <legend class="mb-3 text-light text-center">Confirmar Informações</legend>
             
             <button 
@@ -103,7 +117,6 @@
         </form>
     </section>
     
-    <br>
     <footer class="bg-dark py-3 my-4 "> 
         <div class="container-fluid text-center p-5">
         
@@ -123,8 +136,7 @@
                         IEEE IFF Macaé, Rio de Janeiro - Brazil
                     </strong>
                     <br>
-                    Instituto de Engenheiros Eletricistas e Eletrônicos<br>
-                    Ramo Estudantil do IFFluminense Campus Macaé
+                    Ramo Estudantil IEEE Campus Macaé
                 </p>
                 
                 </div>
@@ -144,7 +156,7 @@
                             Woman In Engineering - IFF Macaé
                         </strong>
                         <br>
-                        Ramo Estudantil do IFFluminense Campus Macaé
+                        Ramo Estudantil IEEE Campus Macaé
                     </p>
                     
                     </div>
@@ -159,10 +171,10 @@
                     <p>@iff.macae</p>
                     <p>
                         <strong>
-                            IFF - Instituto Federal Fluminense - Macaé - RJ
+                            Instituto Federal Fluminense
                         </strong>
                         <br>
-                        Educação pública, gratuita e de qualidade!
+                        Campus Macaé, RJ
                     </p>
                 </div>
             </div>
