@@ -1,7 +1,25 @@
-Nome	E-mail	Status	Ações
-Caíque Nóbrega	iquenobrega@gmail.com	Ativa	
-Davi do Amaral Pereira	ffda.pereira@gmail.com	Ativa	
-Glauber Braga Ferreira	glauberbragaferreira@gmail.com	Ativa	
-Gustavo Porto de Souza	gportodesouza@gmail.com	Ativa	
-Isaías Cândido de Souza	isaiascandido63@gmail.com	Ativa	
-Natan Pessanha	natanpessanha@gmail.com	Ativa
+Bruno Bernardo Palmeira	bruno.palmeira@gsuite.iff.edu.br	Ativa	
+Elen Christine	elenchristinejosedelima@gmail.com	Cancelada	
+Emanuelle Gaipo	manunorbert20@gmail.com	Cancelada	
+Gabrielly Xavier	gabriellyxavier25@hotmail.com	Ativa	
+Giovanna Freitas de Oliveira	giovanna7007@gmail.com	Ativa	
+Giselle Dos Santos Xavier	gisellessxavier@gmail.com	Ativa	
+Helena Nunes Pinheiro	helena.nunesp3@gmail.com	Ativa	
+Jenyfer Nunes	jenyfer.silva@gsuite.iff.edu.br	Cancelada	
+João Pedro Pena de Oliveira	jp.oliveira2003@gmail.com	Ativa	
+Jorge Amado Lopes	jamadolopes@gmail.com	Ativa	
+Juan Fazollo	juanfazollo@gmail.com	Ativa	
+Lavinia Di Lauro Fidelis de Almeida Gessario	lavinia.dilauro2016@gmail.com	Cancelada	
+LETICIA DA LUZ	leticialuz459@gmail.com	Ativa	
+Letícia Karla Correia Galante	leticiakarlacorreiagalante14@gmail.com	Ativa	
+Leticia Lourenço	leticiacarlalourenco@gmail.com	Ativa	
+Ana Caroline Pessanha Resende	najjarpessanha@gmail.com	Cancelada	
+Nélio Teles Ribeiro Júnior	neliojunioribeiro92@gmail.com	Ativa	
+Quézia Silva	queziasilvas@outlook.com	Ativa	
+Rafaela Dutra	dutrarafa27@gmail.com	Ativa	
+raphaela Alves de Azevedo	ffaelamac@gmail.com	Cancelada	
+ROSIANE MARIA	rosianecmaria@gmail.com	Ativa	
+Sofia Leite	sofia.leite.souza13@gmail.com	Ativa	
+Tailana Marques	tailanacoelho2020@gmail.com	Ativa	
+Thaís Rodiegues	thaisprofquimica2019@gmail.com	Ativa	
+Zoé Mello Freire	zoemellofreire@gmail.com	Ativa

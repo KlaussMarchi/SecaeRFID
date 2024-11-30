@@ -1,5 +1,5 @@
 import eel
-import serial
+import serial, time
 import serial.tools.list_ports
 import winsound
 
@@ -54,7 +54,7 @@ def setSerial(msg):
 
 
 @eel.expose
-def getSerial():
+def getSerial(timeout=5):
     global device
     arduino = device.get('object')
     print('procurando...')
@@ -62,18 +62,28 @@ def getSerial():
     if arduino is None:
         return None
 
-    try:
-        response = arduino.readline().decode('utf-8').strip()
-        inicial  = response.find('$')
-        final    = response.find('!')
+    startTime  = time.time()
+    timePassed = 0
+    lastLine = None
 
-        if inicial == -1 or final == -1:
-            return None
+    try:
+        while timePassed < timeout and arduino.in_waiting > 0:
+            response = arduino.readline().decode('utf-8').strip()
+            inicial  = response.find('$')
+            final = response.find('!')
+
+            if inicial != -1 and final != -1:
+                lastLine = response[inicial+1:final]
+
+            timePassed = (time.time() - startTime)
         
-        return response[inicial+1:final]
+        if not lastLine: 
+            time.sleep(0.1)
     except Exception as e:
         print(e)
-        return None
+        lastLine = None
+
+    return lastLine
 
 
 @eel.expose

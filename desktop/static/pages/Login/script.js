@@ -5,6 +5,26 @@ async function sleep(ms) {
     await new Promise(resolve => setTimeout(resolve, ms));
 }
 
+async function blinkText() {
+    const selectElement = document.getElementById("taskOptions");
+
+    while (true) {
+        await sleep(2000)
+
+        selectElement.style.color = "red";
+        await sleep(150);
+        selectElement.style.color = "black";
+        await sleep(100);
+
+        selectElement.style.color = "red";
+        await sleep(150);
+        selectElement.style.color = "black";
+        await sleep(100);
+
+        await sleep(10000)
+    }
+}
+
 async function disableButton(msg, button, sound){
     if(sound == 'good')
         eel.makeGoodBeep()()
@@ -95,9 +115,17 @@ async function findUser(){
     eel.makeGoodBeep()()
 }
 
-async function importOptions() {
-    const options = await eel.getActivities()()
+async function importOptions(){
     let dropdown = document.getElementById("taskOptions");
+    const options = await eel.getActivities()()
+
+    if(options[0].value == 'None'){
+        await sleep(2000)
+        alert('sem internet... conecte-se à rede, reiniciando!')
+        await sleep(5000)
+        location.reload()
+        return
+    }
 
     for(let option of options){
         var optionElement = document.createElement("option");
@@ -105,6 +133,19 @@ async function importOptions() {
         optionElement.text  = option.label;
         dropdown.appendChild(optionElement);
     }
+
+    const current = await eel.getActivitie()()
+
+    for(let option of options)
+        if(option.value == current){
+            dropdown.value = current
+            dropdown.label = option.label
+        }
+}
+
+async function onDropdownChange(event) {
+    const selectedValue = event.target.value;
+    const response = await eel.setActivitie(selectedValue)()
 }
 
 async function registerTaskClick(){
@@ -142,11 +183,29 @@ async function cleanCard() {
     searching = false
 }
 
+function onEnterPress(event) {
+    if (event.key !== 'Enter')
+        return 
+
+    event.preventDefault();
+    const searchUserButton = document.getElementById('searchUserButton');
+
+    if(searchUserButton)
+        searchUserButton.click();
+}
+
+
 window.onload = function () {
     importOptions()
-
+   
     document.getElementById("searchUserButton").addEventListener("click", async () => await findUser());
     document.getElementById("searchCardButton").addEventListener("click", async () => await searchCardClick());
     document.getElementById("registerTask").addEventListener("click", async () => await registerTaskClick());
     document.getElementById("cleanCardButton").addEventListener("click", async () => await cleanCard());
+    document.querySelector('form').addEventListener('keypress', onEnterPress)
+
+    const dropdown = document.getElementById("taskOptions");
+    dropdown.addEventListener("change", onDropdownChange); 
+
+    blinkText()
 };

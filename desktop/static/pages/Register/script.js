@@ -89,9 +89,17 @@ async function cleanCard() {
     searching = false
 }
 
+function onEnterPress(event) {
+    if (event.key !== 'Enter')
+        return 
+
+    event.preventDefault()
+}
+
 window.onload = function () {
     document.getElementById("seachCardButton").addEventListener("click", async () => await searchCardClick());
     document.getElementById("registerUserButton").addEventListener("click", async () => await registerUser());
     document.getElementById("cleanCardButton").addEventListener("click", async () => await cleanCard());
+    document.querySelector('form').addEventListener('keypress', onEnterPress)
 };
 
